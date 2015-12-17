@@ -99,11 +99,9 @@ class TSCellAnimPart(TSPartList):
     f.write(" animSequence: %d,\n"% (self.animSequence,))
     if new:
       f.write("},\n")
-  def modelOut(self, f, animList, t):
-    #t.append((self.transform, self.center))
+  def modelOut(self, f, animList):
     for p in self.parts:
-      p.modelOut(f, animList, t)
-    #t.pop()
+      p.modelOut(f, animList)
 
 class TSGroup(TSBasePart):
   def __init__(self):
@@ -160,7 +158,7 @@ class TSGroup(TSBasePart):
     f.write(" },\n")
     if new:
       f.write("},\n")
-  def modelOut(self, f, animList, t):
+  def modelOut(self, f, animList):
     m = lib.lib3ds_mesh_new("MeshId_%d_Transform_%d"%(self.IDnumber, self.transform))
     lib.lib3ds_mesh_new_point_list(m, len(self.points))
     
@@ -362,11 +360,9 @@ class TSBSPPart(TSPartList):
     f.write(" },\n")
     if new:
       f.write("},\n")
-  def modelOut(self, f, animList, t):
-    t.append((self.transform, self.center)) 
+  def modelOut(self, f, animList):
     for p in self.parts:
-      p.modelOut(f, animList, t)
-    t.pop()
+      p.modelOut(f, animList)
 
 class TSShape(TSPartList):
   def __init__(self):
@@ -625,7 +621,7 @@ class ANShape(TSShape):
 
   def modelOut(self, f):
     for p in self.parts:
-      p.modelOut(f, self.part, [(self.transform, self.center),])
+      p.modelOut(f, self.part)
 
 for k in (TSBasePart, TSPartList, TSShape, ANShape, TSBSPPart, TSGroup, TSPoly, TSShadedPoly, TSSolidPoly, TSTexture4Poly, TSCellAnimPart, ANAnimList, ANCyclicSequence, ANSequence):
   ChunkTypes[k.get_type()] = k
