@@ -1,0 +1,15 @@
+Utility to convert Earthsiege 2 DTS files to a 3DS mesh
+-------------------------------------------------------
+[see http://reverseengineering.stackexchange.com/q/11495 ]
+
+You need to have lib3ds installed to use this.
+
+
+Run: python lib3ds_build.py
+
+to generate the python bindings for it.
+
+
+Run: python convert_dts.py file1.dts file2.dts ...
+
+and hopefully you'll get some 3DS meshes extracted into the current working directory
